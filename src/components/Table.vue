@@ -1,24 +1,83 @@
 <template>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Username</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Gender</th>
-        <th scope="col">Registered Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(item, index) in data" :key="index">
-        <th scope="row">{{ item.login.username }}</th>
-        <td>{{ item.name.first }} {{ item.name.last }}</td>
-        <td>{{ item.email }}</td>
-        <td>{{ item.gender }}</td>
-        <td>{{ currentDateTime(item.registered.date) }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <label for="search" class="form-label float-start">Search</label>
+      <div class="input-group">
+        <input
+          @keyup="searchData"
+          type="text"
+          class="form-control"
+          placeholder="search..."
+          v-model="keyword"
+        />
+        <span class="input-group-text"
+          ><font-awesome-icon icon="search"
+        /></span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="inputState" class="form-label float-start">Gender</label>
+      <select
+        class="form-select form-control"
+        @change="selectGender($event)"
+        v-model="gender"
+        aria-label="Default select example"
+      >
+        <option value="">All Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="form-label float-start"></label>
+      <div class="input-group mb-3">
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            @click="resetFilter"
+          >
+            Reset Filter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 mt-5">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Registered Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in data" :key="index">
+            <th scope="row">{{ item.login.username }}</th>
+            <td>{{ item.name.first }} {{ item.name.last }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.gender }}</td>
+            <td>{{ currentDateTime(item.registered.date) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-12">
+      <nav aria-label="Page navigation example ">
+        <ul class="pagination">
+          <li class="page-item"><button class="page-link" >Previous</button></li>
+          <li class="page-item active"><button class="page-link" >1</button></li>
+          <li class="page-item"><button class="page-link" >2</button></li>
+          <li class="page-item"><button class="page-link" >3</button></li>
+          <li class="page-item"><button class="page-link" >Next</button></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -29,18 +88,48 @@ export default {
   data() {
     return {
       data: [],
+      url: `/?pageSize=10&results=10`,
+      routes: [],
+      gender: "",
+      keyword: "",
+      page: 1,
     };
   },
-  created() {
-    axios
-      .get(`/?page=1&pageSize=10&results=10	`)
-      .then((response) => {
-        this.data = response.data.results;
-        console.log(response.data.results);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+
+  methods: {
+    createdData() {
+      axios
+        .get(this.url, {
+          params: {
+            page: this.page,
+            gender: this.gender,
+            keyword: this.keyword,
+          },
+        })
+        .then((response) => {
+          this.data = response.data.results;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    selectGender(event) {
+      this.gender = event.target.value;
+      this.createdData();
+    },
+    searchData(event) {
+      this.keyword = event.target.value;
+      this.createdData();
+    },
+    resetFilter() {
+      // console.log('click')
+      this.gender = "";
+      this.keyword = "";
+      this.createdData();
+    },
+  },
+  mounted() {
+    this.createdData();
   },
 };
 </script>
