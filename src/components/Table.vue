@@ -69,11 +69,25 @@
     <div class="col-lg-12">
       <nav aria-label="Page navigation example ">
         <ul class="pagination">
-          <li class="page-item"><button class="page-link" >Previous</button></li>
-          <li class="page-item active"><button class="page-link" >1</button></li>
-          <li class="page-item"><button class="page-link" >2</button></li>
-          <li class="page-item"><button class="page-link" >3</button></li>
-          <li class="page-item"><button class="page-link" >Next</button></li>
+          <li class="page-item">
+            <button class="page-link" @click="changePage(`prev_page_url`)">
+              Previous
+            </button>
+          </li>
+
+          <template v-for="item in allPage">
+            <li class="page-item" :class="{ active: item == this.page }">
+              <button class="page-link" @click="changePage(item)">
+                {{ item }}
+              </button>
+            </li>
+          </template>
+
+          <li class="page-item">
+            <button class="page-link" @click="changePage(`next_page_url`)">
+              Next
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
@@ -93,6 +107,11 @@ export default {
       gender: "",
       keyword: "",
       page: 1,
+      next_page_url: "",
+      prev_page_url: "",
+      allPage: [1, 2, 3],
+      minPage: 1,
+      maxPage: 3,
     };
   },
 
@@ -126,6 +145,27 @@ export default {
       this.gender = "";
       this.keyword = "";
       this.createdData();
+    },
+    changePage(value) {
+      if (value == "next_page_url") {
+        if (this.page == this.allPage[this.allPage.length - 1]) {
+          this.page = 3;
+        } else {
+          this.page = this.page + 1;
+        }
+      } else if (value == "prev_page_url") {
+        if (this.page == this.allPage[0]) {
+          this.page = 1;
+        } else {
+          this.page = this.page - 1;
+        }
+      } else {
+        this.page = value;
+      }
+
+      this.createdData();
+
+      console.log(value);
     },
   },
   mounted() {
