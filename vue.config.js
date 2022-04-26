@@ -1,3 +1,3 @@
 module.exports = {
-    publicPath: '/ajaib-test-vue3/'
+    publicPath: '/VUE_3_AJAIB_TEST/'
 }
