@@ -1,19 +1,17 @@
-# ajaib-test-vue3
+# Ajaib Web Engineer Test
 
-## Project setup
 ```
-npm install
-```
+Hallo,
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+ini adalah project test dari AJAIB, 
+
+
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+### View Project
+
+https://6267628a793cde3a7e1b2aa0--stately-raindrop-73d9ce.netlify.app/
