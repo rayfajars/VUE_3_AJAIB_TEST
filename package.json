@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "deploy": "sh deploy.sh"
+    "build": "vue-cli-service build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
@@ -17,8 +16,7 @@
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.6.5",
     "moment": "^2.29.3",
-    "vue": "^3.2.33",
-    "execa": "latest"
+    "vue": "^3.2.33"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.15",
