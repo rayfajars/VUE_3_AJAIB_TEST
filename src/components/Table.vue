@@ -59,39 +59,6 @@
                 ></div>
               </th>
             </template>
-
-            <!-- <th scope="col" @click="sortColumn('name')">
-              Name
-              <div
-                class="arrow"
-                v-if="'name' == nameColumn"
-                :class="ascending ? 'arrow_up' : 'arrow_down'"
-              ></div>
-            </th>
-            <th scope="col" @click="sortColumn('email')">
-              Email
-              <div
-                class="arrow"
-                v-if="'email' == nameColumn"
-                :class="ascending ? 'arrow_up' : 'arrow_down'"
-              ></div>
-            </th>
-            <th scope="col" @click="sortColumn('gender')">
-              Gender
-              <div
-                class="arrow"
-                v-if="'gender' == nameColumn"
-                :class="ascending ? 'arrow_up' : 'arrow_down'"
-              ></div>
-            </th>
-            <th scope="col" @click="sortColumn('registered date')">
-              Registered Date
-              <div
-                class="arrow"
-                v-if="'registeredDate' == nameColumn"
-                :class="ascending ? 'arrow_up' : 'arrow_down'"
-              ></div>
-            </th> -->
           </tr>
         </thead>
         <tbody>
